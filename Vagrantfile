@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/xenial64"
 
+  config.vm.hostname = "ee.dev"
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -18,11 +20,11 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 80
   # config.vm.network "forwarded_port", guest: 3306, host: 3306
-  config.vm.network "forwarded_port", guest: 22, host: 1022, host_ip: "127.0.0.1", id: 'ssh'
+  # config.vm.network "forwarded_port", guest: 22, host: 1022, host_ip: "127.0.0.1", id: 'ssh'
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "127.0.0.1"
+  config.vm.network "private_network", ip: "192.168.50.4"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -44,10 +46,10 @@ Vagrant.configure("2") do |config|
   
   config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
+     # vb.gui = true
   
      # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     vb.memory = "512"
   end
   
   # View the documentation for the provider you are using for more
@@ -59,7 +61,16 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", inline: <<-SHELL
 
 # SHELL
+
   config.vm.provision "shell" do |s|
     s.path = ".provision/bootstrap.sh"
   end
+
+  # Always start MySQL on boot, even when not running the full provisioner
+  # (run: "always" support added in 1.6.0)
+  if vagrant_version >= "1.6.0"
+    config.vm.provision :shell, inline: "sudo service mysql restart", run: "always"
+    config.vm.provision :shell, inline: "sudo service nginx restart", run: "always"
+  end
+
 end
