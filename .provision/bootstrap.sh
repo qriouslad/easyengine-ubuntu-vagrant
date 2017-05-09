@@ -17,6 +17,7 @@ wget -qO ee rt.cx/ee && sudo bash ee
 
 echo "Installing EasyEngine stack..."
 sudo ee stack install
+sudo ee stack install --php7
 
 echo "Setting Ubuntu (user) password to \"easyengine\"..."
 echo "ubuntu:easyengine" | chpasswd
