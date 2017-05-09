@@ -1,15 +1,15 @@
 #!/bin/bash
 
-echo "(Setting up your Vagrant box...)"
+echo "Setting up your Vagrant box..."
 
-echo "(Updating apt-get...)"
-sudo apt-get update > /dev/null 2>&1
+echo "Updating apt-get..."
+sudo apt-get update
 
 # EasyEngine
-echo "(Installing EasyEngine...)"
+echo "Installing EasyEngine..."
 wget -qO ee rt.cx/ee && sudo bash ee
 
-echo "(Setting Ubuntu (user) password to \"easyengine\"...)"
+echo "Setting Ubuntu (user) password to \"easyengine\"..."
 echo "ubuntu:easyengine" | chpasswd
 
 echo "+---------------------------------------------------------+"
@@ -24,6 +24,6 @@ echo "|         so that you can view your server with           |"
 echo "|      \"easyengine.dev/\" instead of \"127.0.0.1/\"      |"
 echo "|                      in a browser.                      |"
 echo "|                                                         |"
-echo "|           You can SSH with ubuntu / vagrant             |"
+echo "|           You can SSH with ubuntu / easyengine          |"
 echo "|                                                         |"
 echo "+---------------------------------------------------------+"
