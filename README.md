@@ -5,7 +5,7 @@
 1. Clone repo into your current directory
 `git clone https://github.com/qriouslad/easyengine-ubuntu-vagrant.git .`
 
-2. 'vagrant up'
+2. `vagrant up`
 
 ### Notes: 
 
