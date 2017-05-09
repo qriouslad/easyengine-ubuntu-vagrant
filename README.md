@@ -1,4 +1,4 @@
-# Vagrant box with EasyEngine LEMP stack on Ubuntu Xenial 16.04
+# Vagrant box with EasyEngine on Ubuntu 16.04
 
 # Installation
 
